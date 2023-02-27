@@ -50,12 +50,32 @@ class _ChatScreenState extends State<ChatScreen> {
     final chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
       appBar: AppBar(
-        elevation: 2,
+        // centerTitle: false,
+        elevation: 5,
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(AssetsManager.openaiLogo),
+          padding: const EdgeInsets.all(5.0),
+          child: Image.asset(AssetsManager.openaiLogoo),
         ),
-        title: const Text("ChatGPT"),
+        title: Column(children: const <Widget>[
+          
+          Text(
+            'Mindful AI',
+            style: TextStyle(
+                color: Color.fromARGB(255, 0, 0, 0),
+                fontWeight:FontWeight.bold,
+                fontFamily: 'SpectralSC', 
+                // fontFamily: 'SpectralSC-Bold',
+                fontSize:17),
+          ),
+          SizedBox( width: 5 ),
+           Text(
+            'ChatBot ',
+          style: TextStyle(
+            color: Color.fromARGB(255, 177, 1, 1),
+                fontWeight: FontWeight.w600,
+                fontSize: 8,      
+          ),),
+        ]),
         actions: [
           IconButton(
             onPressed: () async {
@@ -63,7 +83,15 @@ class _ChatScreenState extends State<ChatScreen> {
             },
             icon: const Icon(Icons.more_vert_rounded, color: Colors.white),
           ),
+          
         ],
+        backgroundColor: Colors.orange[200],
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular( 25),
+            bottomRight: Radius.circular( 25),
+          )
+        ),
       ),
       body: SafeArea(
         child: Column(
@@ -83,7 +111,7 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
             if (_isTyping) ...[
               const SpinKitThreeBounce(
-                color: Colors.white,
+                color: Color.fromARGB(255, 248, 3, 3),
                 size: 18,
               ),
             ],
@@ -91,24 +119,33 @@ class _ChatScreenState extends State<ChatScreen> {
               height: 15,
             ),
             Material(
-              color: cardColor,
+              color:Color.fromARGB(255, 255, 224, 178),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Row(
                   children: [
+                    Icon( 
+                      Icons.keyboard,
+                      color: Colors.black,
+                    ),
                     Expanded(
-                      child: TextField(
-                        focusNode: focusNode,
-                        style: const TextStyle(color: Colors.white),
-                        controller: textEditingController,
-                        onSubmitted: (value) async {
-                          await sendMessageFCT(
-                              modelsProvider: modelsProvider,
-                              chatProvider: chatProvider);
-                        },
-                        decoration: const InputDecoration.collapsed(
-                            hintText: "How can I help you",
-                            hintStyle: TextStyle(color: Colors.grey)),
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: TextField(
+                          focusNode: focusNode,
+                          style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0),
+                          fontWeight: FontWeight.w500),
+                          controller: textEditingController,
+                          onSubmitted: (value) async {
+                            await sendMessageFCT(
+                                modelsProvider: modelsProvider,
+                                chatProvider: chatProvider);
+                          },
+                          decoration: const InputDecoration.collapsed(
+                              hintText: "How can I help you !",
+                              hintStyle: TextStyle(color: Color.fromARGB(255, 1, 0, 0),
+                              fontWeight: FontWeight.w200, fontStyle: FontStyle.italic)),
+                        ),
                       ),
                     ),
                     IconButton(
@@ -119,8 +156,9 @@ class _ChatScreenState extends State<ChatScreen> {
                         },
                         icon: const Icon(
                           Icons.send,
-                          color: Colors.white,
-                        ))
+                          color: Color.fromARGB(255, 4, 4, 4),
+                        ),
+                         )
                   ],
                 ),
               ),
@@ -147,7 +185,7 @@ class _ChatScreenState extends State<ChatScreen> {
           content: TextWidget(
             label: "You cant send multiple messages at a time",
           ),
-          backgroundColor: Colors.red,
+          backgroundColor: Color.fromARGB(255, 255, 255, 255),
         ),
       );
       return;
@@ -158,7 +196,7 @@ class _ChatScreenState extends State<ChatScreen> {
           content: TextWidget(
             label: "Please type a message",
           ),
-          backgroundColor: Colors.red,
+          backgroundColor: Color.fromARGB(255, 240, 233, 233),
         ),
       );
       return;

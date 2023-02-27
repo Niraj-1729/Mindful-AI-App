@@ -1,4 +1,5 @@
 import 'package:chatgpt_course/providers/models_provider.dart';
+import 'package:chatgpt_course/widgets/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,14 +27,14 @@ class MyApp extends StatelessWidget {
         ),
       ],
       child: MaterialApp(
-        title: 'Flutter ChatBOT',
+        title: 'Mindful AI',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             scaffoldBackgroundColor: scaffoldBackgroundColor,
-            appBarTheme: AppBarTheme(
-              color: cardColor,
+            appBarTheme: const AppBarTheme(
+              color: Colors.black,
             )),
-        home: const ChatScreen(),
+        home:  SplashScreen(),
       ),
     );
   }

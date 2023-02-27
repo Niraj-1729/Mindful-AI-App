@@ -19,7 +19,7 @@ class TextWidget extends StatelessWidget {
       label,
       // textAlign: TextAlign.justify,
       style: TextStyle(
-        color: color ?? Colors.white,
+        color: color ?? Colors.red,
         fontSize: fontSize,
         fontWeight: fontWeight ?? FontWeight.w500,
       ),
