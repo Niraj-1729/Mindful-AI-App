@@ -49,6 +49,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final modelsProvider = Provider.of<ModelsProvider>(context);
     final chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
+      
       appBar: AppBar(
         // centerTitle: false,
         elevation: 5,
@@ -156,6 +157,17 @@ class _ChatScreenState extends State<ChatScreen> {
                         },
                         icon: const Icon(
                           Icons.send,
+                          color: Color.fromARGB(255, 4, 4, 4),
+                        ),
+                         ),
+                    IconButton(
+                        onPressed: () async {
+                          await sendMessageFCT(
+                              modelsProvider: modelsProvider,
+                              chatProvider: chatProvider);
+                        },
+                        icon: const Icon(
+                          Icons.image_search_rounded,
                           color: Color.fromARGB(255, 4, 4, 4),
                         ),
                          )

@@ -1,3 +1,4 @@
+import 'package:chatgpt_course/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:chatgpt_course/screens/chat_screen.dart';
 import 'dart:async';
@@ -18,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(Duration(seconds: 4),  
             ()=>Navigator.pushReplacement(context,  
             MaterialPageRoute(builder:  
-                (context) => ChatScreen()  
+                (context) => HomeScreen()  
             )  
          )  
     );  
@@ -54,7 +55,7 @@ class _SplashScreenState extends State<SplashScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(
-                height: 300,
+                height: 240,
               ),
               Image.asset(
                 'assets/images/openai_logo.png',

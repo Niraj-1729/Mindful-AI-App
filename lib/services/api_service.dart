@@ -7,6 +7,7 @@ import 'package:chatgpt_course/models/chat_model.dart';
 import 'package:chatgpt_course/models/models_model.dart';
 import 'package:http/http.dart' as http;
 
+
 class ApiService {
   static Future<List<ModelsModel>> getModels() async {
     try {
@@ -55,6 +56,7 @@ class ApiService {
       );
 
       Map jsonResponse = jsonDecode(response.body);
+      // Map jsonResponse = jsonDecode(response.body);
 
       if (jsonResponse['error'] != null) {
         // print("jsonResponse['error'] ${jsonResponse['error']["message"]}");
