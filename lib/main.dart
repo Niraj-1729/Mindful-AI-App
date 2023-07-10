@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
             appBarTheme: const AppBarTheme(
               color: Colors.black,
             )),
-        home:  SplashScreen(),
+        home:  const SplashScreen(),
       ),
     );
   }

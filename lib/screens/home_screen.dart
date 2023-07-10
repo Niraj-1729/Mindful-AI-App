@@ -16,7 +16,7 @@ class HomeScreen extends StatelessWidget {
         fit: StackFit.expand,
         children: [
           Container(
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Color.fromARGB(255, 244, 243, 243),
@@ -90,7 +90,7 @@ class HomeScreen extends StatelessWidget {
                         Text('Text Chat'),
                         const SizedBox(width: 100),
                         ElevatedButton(
-                          style: ElevatedButton.styleFrom(
+                          style: OutlinedButton.styleFrom(
                             backgroundColor: Colors.orange[300],
                           ),
                           onPressed: () {

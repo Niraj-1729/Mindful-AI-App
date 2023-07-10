@@ -1,9 +1,10 @@
 import 'dart:convert';
 
- 
+ //niraj
  
 import 'package:http/http.dart' as http;
-  String apiKey = "";
+  
+  String apiKey = "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";
 
 class ApiSercivesVoice {
   static String baseUrl = "https://api.openai.com/v1/completions";
@@ -35,7 +36,7 @@ class ApiSercivesVoice {
       return msg;
     }
     else { 
-      print("fialed to fetch data");
+      print("failed to fetch data");
     }
   }
 }
