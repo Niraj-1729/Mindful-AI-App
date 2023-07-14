@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-import '../services/assets_manager.dart';
+import 'api_servies.dart';
+import 'assets_manager.dart';
 
 class AiImageScreen extends StatefulWidget {
   const AiImageScreen({super.key});
@@ -14,6 +17,9 @@ class _AiImageScreenState extends State<AiImageScreen> {
   var sizes = ["small", "Medium", "large"];
   var values = ["256x256", "512x512", "1024x1024"];
   String? dropValue;
+  var textController = TextEditingController();
+  String image = '';
+  var isLoaded = false;
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +79,7 @@ class _AiImageScreenState extends State<AiImageScreen> {
                             color: Color.fromARGB(255, 232, 228, 228),
                             borderRadius: BorderRadius.circular(12)),
                         child: TextFormField(
+                          controller: textController,
                           decoration: const InputDecoration(
                             hintText: "eg 'Developer at Moon' ",
                           ),
@@ -103,30 +110,79 @@ class _AiImageScreenState extends State<AiImageScreen> {
                               child: Text(sizes[index]),
                             ),
                           ),
-                          onChanged: (values) {},
+                          onChanged: (value) {
+                            setState(() {
+                              dropValue = value.toString();
+                            });
+                          },
                         ),
                       ),
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 44,
+                  height: 50,
                   width: 300,
                   child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.amber,
                           shadowColor: Colors.black,
                           shape: const StadiumBorder()),
-                      onPressed: () {},
+                      onPressed: () async {
+                        if (textController.text.isNotEmpty &&
+                            dropValue!.isNotEmpty) {
+                          setState(() {
+                            isLoaded = false;
+                          });
+                          image = await Api.generateImage(
+                              textController.text, dropValue!);
+                          setState(() {
+                            isLoaded = true;
+                          });
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text(
+                                  "please pass the text query and select size"),
+                            ),
+                          );
+                        }
+                      },
                       child: const Text("Generate")),
                 )
               ],
             )),
             Expanded(
-                flex: 4,
-                child: Container(
-                  color: Colors.black,
-                )),
+              flex: 2,
+              child: isLoaded
+                  ? Image.network(image)
+                  : Container(
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        color: Colors.white,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: const [
+                           SpinKitCircle(
+                            color: Colors.orange,
+                            size: 50.0,
+                          ),
+
+                          // Image.network(
+                          //   'https://tenor.com/view/windows-xp-loading-gif-20214935',
+                          //   width: 200, // set the width of the image
+                          //   height: 200, // set the height of the image
+                          //   fit: BoxFit.cover, // set the fit of the image
+                          // ),
+                          SizedBox(height: 30),
+                          Text("waiting for image to be generated...",
+                              style: TextStyle(fontSize: 16.0))
+                        ],
+                      ),
+                    ),
+            ),
           ],
         ),
       ),
