@@ -50,7 +50,8 @@ class _SplashScreenState extends State<SplashScreen> {
               ),
             ),
           ),
-          Column(
+         ListView(
+          children: [Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -109,7 +110,9 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               ),
             ],
-          ),
+          
+          )]
+         ),
         ],
       ),
     );
