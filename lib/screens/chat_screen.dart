@@ -78,12 +78,19 @@ class _ChatScreenState extends State<ChatScreen> {
           ),),
         ]),
         actions: [
+          IconButton(onPressed: ()
+          {
+            chatProvider.clearMessages();
+            print("all cleared");
+          }, 
+          icon: Icon(Icons.clear_all_rounded)),
           IconButton(
             onPressed: () async {
               await Services.showModalSheet(context: context);
             },
             icon: const Icon(Icons.more_vert_rounded, color: Colors.white),
           ),
+          
           
         ],
         backgroundColor: Colors.orange[200],
@@ -233,7 +240,8 @@ class _ChatScreenState extends State<ChatScreen> {
       log("error $error");
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: TextWidget(
-          label: error.toString(),
+          color: Colors.black,
+          label: "\tERROR:\n"+error.toString(),
         ),
         backgroundColor: Colors.red,
       ));

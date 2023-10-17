@@ -14,6 +14,11 @@ class ChatProvider with ChangeNotifier {
     notifyListeners();
   }
 
+  void clearMessages() {
+    chatList.clear();
+    notifyListeners();
+  }
+
   Future<void> sendMessageAndGetAnswers(
       {required String msg, required String chosenModelId}) async {
     chatList.addAll(await ApiService.sendMessage(
