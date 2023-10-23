@@ -20,7 +20,7 @@ class ApiSercivesVoice {
       headers: header,
       body: jsonEncode( {
         "model": "text-davinci-003",
-        "promt": '$message',
+        "prompt": '$message',
         "temperature": 0,
         "max_tokens":100,
         "top_p": 1,
@@ -29,7 +29,7 @@ class ApiSercivesVoice {
         "stop": ["Human ", "AI"]
       })
     );
-
+    print(res.body);
     if (res.statusCode==200) {
       var data = jsonDecode(res.body.toString());
       var  msg = data ['choices'] [ 0]['text'];

@@ -28,6 +28,13 @@ scroolMethod() {
 }
 
 class _VoiceScreenState extends State<VoiceScreen> {
+
+  void clearChat()
+  {
+    setState(() {
+      messages.clear();
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +57,7 @@ class _VoiceScreenState extends State<VoiceScreen> {
                   speechToText.listen(onResult: (result) {
                     setState(() {
                       text = result.recognizedWords;
+                      
                     });
                   });
                 });
@@ -107,6 +115,18 @@ class _VoiceScreenState extends State<VoiceScreen> {
             ),
           ),
         ]),
+        actions: [
+          IconButton(onPressed: ()
+          {
+           // chatProvider.clearMessages();
+            clearChat();
+            print("all cleared");
+          }, 
+          icon: Icon(Icons.clear_all_rounded)),
+  
+          
+          
+        ],
 
         backgroundColor: Colors.orange[200],
         shape: const RoundedRectangleBorder(
@@ -245,6 +265,7 @@ Widget chatBubble({required chattext, required ChatMessageType? type}) {
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       CircleAvatar(
+      
         backgroundColor: Colors.white,
         child: Image.asset(
           AssetsManager.userImage,
